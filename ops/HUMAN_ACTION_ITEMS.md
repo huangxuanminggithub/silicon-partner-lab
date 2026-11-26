@@ -1,8 +1,8 @@
 # 人类合伙人协助事项持久化清单（Human Action Items · EXP-001）
 
 - **当前阶段**：Phase 1 — Earn First Confirmed Dollar ($0 -> $1+)
-- **最后更新（UTC）**：`2026-11-26T09:44:11Z`
-- **总体进度**：已完成 `2/8` 项 ｜ 剩余 P0 阻塞项：`1` 项
+- **最后更新（UTC）**：`2026-11-26T10:17:23Z`
+- **总体进度**：已完成 `3/8` 项 ｜ 剩余 P0 阻塞项：`1` 项
 - **总计需要人类垫付资金**：`$0.00`（当前所有 P0/P1/P2 事项均为零成本冷启动）
 
 ## 一览表
@@ -11,8 +11,8 @@
 | --- | --- | --- | --- | --- | --- |
 | `H-001` | `P0` | ✅ DONE | 连接 Google Drive 插件（gdrive），允许将全部持久化文件同步至云端硬盘 | ~1 分钟 | `$0.00` |
 | `H-002` | `P0` | ✅ DONE | 在 GitHub 网页新建空公开仓库 silicon-partner-lab 并授权集成，让我一键推库上线 | ~1 分钟 | `$0.00` |
-| `H-003` | `P1` | ⬜ TODO | 免费开启 GitHub Pages（或 Cloudflare Pages）上线 VeriPR 在线体验台 | ~2 分钟 | `$0.00` |
-| `H-004` | `P0` | ⬜ TODO | 在爱发电（afdian.com）或面包多（mbd.pub）零门槛上架 VeriPR Pro 早鸟包（¥49） | ~10 分钟 | `$0.00` |
+| `H-003` | `P1` | ✅ DONE | 免费开启 GitHub Pages（或 Cloudflare Pages）上线 VeriPR 在线体验台 | ~2 分钟 | `$0.00` |
+| `H-004` | `P0` | 🟡 IN_PROGRESS | 在爱发电（afdian.com）或面包多（mbd.pub）零门槛上架 VeriPR Pro 早鸟包（¥49） | ~10 分钟 | `$0.00` |
 | `H-005` | `P1` | ⬜ TODO | 在 V2EX /go/create、即刻、掘金/知乎发布首波中文冷启动实测贴 | ~10 分钟 | `$0.00` |
 | `H-006` | `P1` | ⬜ TODO | 发布 Hacker News Show HN + 免费上架 GitHub Marketplace Action | ~10 分钟 | `$0.00` |
 | `H-007` | `P2` | ⬜ TODO | （可选·出现海外意向后）开通 Creem.io 或 Lemon Squeezy 上架 $19 全球版 | ~20 分钟 | `$0.00` |
@@ -41,15 +41,16 @@
 - **执行备注**：已完成仓库挂载并推送完整代码与 v0.2.0 Release 上线
 
 ### H-003 [P1] 免费开启 GitHub Pages（或 Cloudflare Pages）上线 VeriPR 在线体验台
-- **状态**：⬜ TODO ｜ **分类**：`LIVE_DEMO_HOSTING` ｜ **耗时**：~2 分钟 ｜ **资金成本**：`$0.00`
+- **状态**：✅ DONE ｜ **分类**：`LIVE_DEMO_HOSTING` ｜ **耗时**：~2 分钟 ｜ **资金成本**：`$0.00`
 - **为什么必须人类协助**：需要在 GitHub 仓库 Settings -> Pages（或 Cloudflare 后台）点选开启静态网站部署。
 - **具体执行步骤**：
   1. 在 GitHub 仓库 Settings -> Pages 选择从 main 分支的 /site 目录（或通过 Cloudflare Pages 指定 site/ 目录）部署。
   2. 获得免费公网 URL 后发给我，我帮你更新进中英文首发文案与 README。
 - **完成后立即解锁**：读者点开网页即可零安装粘贴 git diff 现场体验抓作弊效果，显著提升转化率。
+- **执行备注**：已开启 GitHub Actions 发布源并触发 site/ 自动上线
 
 ### H-004 [P0] 在爱发电（afdian.com）或面包多（mbd.pub）零门槛上架 VeriPR Pro 早鸟包（¥49）
-- **状态**：⬜ TODO ｜ **分类**：`PAYMENT_CHANNEL` ｜ **耗时**：~10 分钟 ｜ **资金成本**：`$0.00`
+- **状态**：🟡 IN_PROGRESS ｜ **分类**：`PAYMENT_CHANNEL` ｜ **耗时**：~10 分钟 ｜ **资金成本**：`$0.00`
 - **为什么必须人类协助**：收款与提现必须绑定人类实名身份与微信/支付宝账户；国内平台免海外企业主体，综合费率约 6%。
 - **具体执行步骤**：
   1. 登录爱发电（afdian.com）或面包多（mbd.pub）开通个人创作者收款。
@@ -57,6 +58,7 @@
   3. 可选创建商品 2：EXP-001 实验 Early Backer 支持席位（定价 ¥19.9）。
   4. 把生成的商品购买链接发给我，我立即回填进 site/app.js、README.md 与首发文案。
 - **完成后立即解锁**：正式打通真实收款闭环，具备实现“第一笔真实净利润”的物理条件。
+- **执行备注**：已创建商品链接 https://ifdian.net/item/34f398b0e97f11f1ae6f5254001e7c00 ，待绑定作品集/独立方案自动解锁 ZIP 后公开上架
 
 ### H-005 [P1] 在 V2EX /go/create、即刻、掘金/知乎发布首波中文冷启动实测贴
 - **状态**：⬜ TODO ｜ **分类**：`LAUNCH_CN` ｜ **耗时**：~10 分钟 ｜ **资金成本**：`$0.00`

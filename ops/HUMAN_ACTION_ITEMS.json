@@ -1,7 +1,7 @@
 {
   "experiment_id": "EXP-001",
   "phase": "Phase 1 — Earn First Confirmed Dollar ($0 -> $1+)",
-  "updated_at": "2026-11-26T09:44:11Z",
+  "updated_at": "2026-11-26T10:17:23Z",
   "items": [
     {
       "id": "H-001",
@@ -38,7 +38,7 @@
     {
       "id": "H-003",
       "priority": "P1",
-      "status": "TODO",
+      "status": "DONE",
       "category": "LIVE_DEMO_HOSTING",
       "title": "免费开启 GitHub Pages（或 Cloudflare Pages）上线 VeriPR 在线体验台",
       "estimated_minutes": 2,
@@ -49,12 +49,12 @@
         "获得免费公网 URL 后发给我，我帮你更新进中英文首发文案与 README。"
       ],
       "unlocks": "读者点开网页即可零安装粘贴 git diff 现场体验抓作弊效果，显著提升转化率。",
-      "notes": ""
+      "notes": "已开启 GitHub Actions 发布源并触发 site/ 自动上线"
     },
     {
       "id": "H-004",
       "priority": "P0",
-      "status": "TODO",
+      "status": "IN_PROGRESS",
       "category": "PAYMENT_CHANNEL",
       "title": "在爱发电（afdian.com）或面包多（mbd.pub）零门槛上架 VeriPR Pro 早鸟包（¥49）",
       "estimated_minutes": 10,
@@ -67,7 +67,7 @@
         "把生成的商品购买链接发给我，我立即回填进 site/app.js、README.md 与首发文案。"
       ],
       "unlocks": "正式打通真实收款闭环，具备实现“第一笔真实净利润”的物理条件。",
-      "notes": ""
+      "notes": "已创建商品链接 https://ifdian.net/item/34f398b0e97f11f1ae6f5254001e7c00 ，待绑定作品集/独立方案自动解锁 ZIP 后公开上架"
     },
     {
       "id": "H-005",

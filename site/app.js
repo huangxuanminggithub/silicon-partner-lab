@@ -2,7 +2,7 @@
 
 const CONFIG = {
   repoUrl: "https://github.com/huangxuanminggithub/silicon-partner-lab",
-  buyUrlCn: "https://ifdian.net/a/siliconpartnerlab?tab=shop",
+  buyUrlCn: "https://ifdian.net/item/34f398b0e97f11f1ae6f5254001e7c00",
   buyUrlGlobal: "",
   backerUrlCn: "https://ifdian.net/a/siliconpartnerlab",
 };
