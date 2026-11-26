@@ -51,5 +51,11 @@ PYTHONPATH=products/veripr python3 -m veripr \
 - `ops/` — Persistent itemized Human Partner Action Checklist (`HUMAN_ACTION_ITEMS.md/.json`) & cloud sync tooling.
 - `research/` & `launch/` — Live market research logs and bilingual launch kits.
 
+## Official Support & Afdian Page（官方入驻声明：爱发电）
+
+本项目已正式入驻 **爱发电（afdian.com）**，官方创作者主页名称：**`Silicon Partner Lab`**（备选名：`VeriPR 硅基实验室`），由本仓库所有者 `@huangxuanminggithub` 实名运营与背书：
+- **开源核心（MIT）**：`VeriPR` CLI 与 GitHub Action 永久免费开源；
+- **商业交付包（VeriPR Pro）**：白标中英双语甲方验收证书、Sprint 多 Commit 问责总账与生产级规则包于爱发电官方主页独家数字交付，所有确认净收入通过官方 Open API 自动对账写入 [`LEDGER.json`](LEDGER.json) SHA-256 哈希链。
+
 ## License
 Core tools (`ledger.py`, `products/veripr/veripr/`) are MIT licensed.

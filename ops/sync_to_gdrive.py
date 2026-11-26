@@ -26,6 +26,7 @@ FOLDERS = {
     "02_Research_and_Strategy": "1sX3gf8_q8fc5ztyb7w_pBH3yJ7dFZ_pj",
     "03_Launch_and_Distribution": "1kzsF95euKxd5qTsjyBJnS7XOAkerH1MD",
     "04_Product_Releases": "1bz-Fl9Y8xJijd-cldbi2ARDAkQy31CZa",
+    "05_Local_Session_Handover": "1LxtobVdXomr4tLmvHf4fd3VjiM72cQvA",
 }
 
 UPLOAD_PLAN: list[tuple[str, str]] = [
@@ -47,6 +48,7 @@ UPLOAD_PLAN: list[tuple[str, str]] = [
     ("dist/veripr-site-standalone.html", "04_Product_Releases"),
     ("dist/_samples/sample-client-certificate-zh.html", "04_Product_Releases"),
     ("dist/silicon-partner-lab-repo-snapshot.tar.gz", "04_Product_Releases"),
+    ("ops/LOCAL_SESSION_PLAYBOOK.md", "05_Local_Session_Handover"),
 ]
 
 ID_RE = re.compile(r"ID:\s*([A-Za-z0-9_-]+)")
@@ -73,7 +75,31 @@ def build_repo_snapshot() -> Path:
     return snap_path
 
 
-def upload_file(local_path: Path, parent_id: str) -> str:
+def list_folder_name_map(folder_id: str) -> dict[str, str]:
+    """Return {filename: file_id} for non-trashed items currently inside folder_id."""
+    proc = subprocess.run(
+        ["gdrive", "readonly", "ls", folder_id, "--json"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    items = json.loads(proc.stdout or "[]")
+    return {item["name"]: item["id"] for item in items if "name" in item and "id" in item}
+
+
+def upsert_file(local_path: Path, parent_id: str, existing_map: dict[str, str]) -> str:
+    """Update existing Drive file in-place if present; otherwise upload as a new child file."""
+    existing_id = existing_map.get(local_path.name)
+    if existing_id:
+        subprocess.run(
+            ["gdrive", "mutate", "update", existing_id, str(local_path)],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        print(f"Updated in-place {local_path.name} -> {existing_id}")
+        return existing_id
+
     proc = subprocess.run(
         ["gdrive", "mutate", "upload", str(local_path), "--parent", parent_id],
         capture_output=True,
@@ -83,23 +109,28 @@ def upload_file(local_path: Path, parent_id: str) -> str:
     out = (proc.stdout + "\n" + proc.stderr).strip()
     m = ID_RE.search(out)
     file_id = m.group(1) if m else out
-    print(f"Uploaded {local_path.name} -> {parent_id} (ID: {file_id})")
+    existing_map[local_path.name] = file_id
+    print(f"Uploaded new {local_path.name} -> {parent_id} (ID: {file_id})")
     return file_id
 
 
 def main() -> int:
     build_repo_snapshot()
+    folder_cache: dict[str, dict[str, str]] = {}
     synced = []
     for rel_path, folder_key in UPLOAD_PLAN:
         local = ROOT / rel_path
         if not local.exists():
             raise FileNotFoundError(f"Missing file to upload: {local}")
-        fid = upload_file(local, FOLDERS[folder_key])
+        parent_id = FOLDERS[folder_key]
+        if parent_id not in folder_cache:
+            folder_cache[parent_id] = list_folder_name_map(parent_id)
+        fid = upsert_file(local, parent_id, folder_cache[parent_id])
         synced.append(
             {
                 "local_path": rel_path,
                 "folder": folder_key,
-                "parent_id": FOLDERS[folder_key],
+                "parent_id": parent_id,
                 "drive_file_id": fid,
                 "size_bytes": local.stat().st_size,
             }
@@ -115,8 +146,10 @@ def main() -> int:
         "uploaded_files": synced,
     }
     STATE_PATH.write_text(json.dumps(state, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    # Also upload the sync state manifest itself into 01_Governance_and_Ledger
-    state_fid = upload_file(STATE_PATH, FOLDERS["01_Governance_and_Ledger"])
+    gov_id = FOLDERS["01_Governance_and_Ledger"]
+    if gov_id not in folder_cache:
+        folder_cache[gov_id] = list_folder_name_map(gov_id)
+    state_fid = upsert_file(STATE_PATH, gov_id, folder_cache[gov_id])
     print(f"Sync complete! {len(synced) + 1} files persisted to Google Drive (state ID: {state_fid}).")
     return 0
 

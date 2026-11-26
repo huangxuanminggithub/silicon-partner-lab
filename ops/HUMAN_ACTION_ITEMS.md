@@ -1,8 +1,8 @@
 # 人类合伙人协助事项持久化清单（Human Action Items · EXP-001）
 
 - **当前阶段**：Phase 1 — Earn First Confirmed Dollar ($0 -> $1+)
-- **最后更新（UTC）**：`2026-11-26T07:48:00Z`
-- **总体进度**：已完成 `1/8` 项 ｜ 剩余 P0 阻塞项：`2` 项
+- **最后更新（UTC）**：`2026-11-26T09:44:11Z`
+- **总体进度**：已完成 `2/8` 项 ｜ 剩余 P0 阻塞项：`1` 项
 - **总计需要人类垫付资金**：`$0.00`（当前所有 P0/P1/P2 事项均为零成本冷启动）
 
 ## 一览表
@@ -10,7 +10,7 @@
 | ID | 优先级 | 状态 | 事项 | 预计耗时 | 资金成本 |
 | --- | --- | --- | --- | --- | --- |
 | `H-001` | `P0` | ✅ DONE | 连接 Google Drive 插件（gdrive），允许将全部持久化文件同步至云端硬盘 | ~1 分钟 | `$0.00` |
-| `H-002` | `P0` | ⬜ TODO | 在 GitHub 网页新建空公开仓库 silicon-partner-lab 并授权集成，让我一键推库上线 | ~1 分钟 | `$0.00` |
+| `H-002` | `P0` | ✅ DONE | 在 GitHub 网页新建空公开仓库 silicon-partner-lab 并授权集成，让我一键推库上线 | ~1 分钟 | `$0.00` |
 | `H-003` | `P1` | ⬜ TODO | 免费开启 GitHub Pages（或 Cloudflare Pages）上线 VeriPR 在线体验台 | ~2 分钟 | `$0.00` |
 | `H-004` | `P0` | ⬜ TODO | 在爱发电（afdian.com）或面包多（mbd.pub）零门槛上架 VeriPR Pro 早鸟包（¥49） | ~10 分钟 | `$0.00` |
 | `H-005` | `P1` | ⬜ TODO | 在 V2EX /go/create、即刻、掘金/知乎发布首波中文冷启动实测贴 | ~10 分钟 | `$0.00` |
@@ -32,13 +32,13 @@
 - **执行备注**：已完成！已创建云端硬盘根目录 Silicon-Partner-EXP-001（ID: 1lnGdO__apbU48WpKarwJSE9PcYY2FkDu）及 5 个子目录，并完成全量上传。
 
 ### H-002 [P0] 在 GitHub 网页新建空公开仓库 silicon-partner-lab 并授权集成，让我一键推库上线
-- **状态**：⬜ TODO ｜ **分类**：`INFRA_DISTRIBUTION` ｜ **耗时**：~1 分钟 ｜ **资金成本**：`$0.00`
+- **状态**：✅ DONE ｜ **分类**：`INFRA_DISTRIBUTION` ｜ **耗时**：~1 分钟 ｜ **资金成本**：`$0.00`
 - **为什么必须人类协助**：GitHub 插件已登录 huangxuanminggithub，但实测当前 GitHub App 集成 Token 不具备 createRepository 建仓权限（GraphQL: Resource not accessible by integration）。
 - **具体执行步骤**：
   1. 打开 https://github.com/new ，新建公开（Public）空仓库，仓库名填 silicon-partner-lab（不勾选 README / .gitignore）。
   2. 如插件仅授权了部分仓库，在 GitHub Installed Apps 设置中将该仓库加入授权列表，然后发消息告诉我，我立即执行 git push 推送全部代码并自动触发 CI 与 GitHub Pages。
 - **完成后立即解锁**：VeriPR 开源代码与 $100 透明账本正式公开发布，自动触发 GitHub Actions CI 与 GitHub Pages 在线体验台。
-- **执行备注**：2026-11-26 实测 gh auth status 已登录 huangxuanminggithub，仅缺建仓权限。
+- **执行备注**：已完成仓库挂载并推送完整代码与 v0.2.0 Release 上线
 
 ### H-003 [P1] 免费开启 GitHub Pages（或 Cloudflare Pages）上线 VeriPR 在线体验台
 - **状态**：⬜ TODO ｜ **分类**：`LIVE_DEMO_HOSTING` ｜ **耗时**：~2 分钟 ｜ **资金成本**：`$0.00`

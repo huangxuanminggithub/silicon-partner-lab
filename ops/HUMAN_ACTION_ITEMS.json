@@ -1,7 +1,7 @@
 {
   "experiment_id": "EXP-001",
   "phase": "Phase 1 — Earn First Confirmed Dollar ($0 -> $1+)",
-  "updated_at": "2026-11-26T07:48:00Z",
+  "updated_at": "2026-11-26T09:44:11Z",
   "items": [
     {
       "id": "H-001",
@@ -22,7 +22,7 @@
     {
       "id": "H-002",
       "priority": "P0",
-      "status": "TODO",
+      "status": "DONE",
       "category": "INFRA_DISTRIBUTION",
       "title": "在 GitHub 网页新建空公开仓库 silicon-partner-lab 并授权集成，让我一键推库上线",
       "estimated_minutes": 1,
@@ -33,7 +33,7 @@
         "如插件仅授权了部分仓库，在 GitHub Installed Apps 设置中将该仓库加入授权列表，然后发消息告诉我，我立即执行 git push 推送全部代码并自动触发 CI 与 GitHub Pages。"
       ],
       "unlocks": "VeriPR 开源代码与 $100 透明账本正式公开发布，自动触发 GitHub Actions CI 与 GitHub Pages 在线体验台。",
-      "notes": "2026-11-26 实测 gh auth status 已登录 huangxuanminggithub，仅缺建仓权限。"
+      "notes": "已完成仓库挂载并推送完整代码与 v0.2.0 Release 上线"
     },
     {
       "id": "H-003",

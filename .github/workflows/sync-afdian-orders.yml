@@ -1,0 +1,45 @@
+name: Sync Confirmed Orders from Afdian Open API
+
+on:
+  schedule:
+    - cron: '15 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reconcile-revenue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Reconcile Afdian Paid Orders into SHA-256 Ledger
+        env:
+          AFDIAN_USER_ID: ${{ secrets.AFDIAN_USER_ID }}
+          AFDIAN_API_TOKEN: ${{ secrets.AFDIAN_API_TOKEN }}
+          AFDIAN_CNY_PER_USD: '7.25'
+        run: |
+          python3 ops/sync_afdian_orders.py --skip-if-unconfigured
+          python3 ledger.py verify
+          python3 ledger.py status
+
+      - name: Commit Updated Ledger if New Revenue Confirmed
+        run: |
+          if [ -n "$(git status --porcelain LEDGER.json)" ]; then
+            git config user.name "silicon-partner-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add LEDGER.json
+            git commit -m "ledger(revenue): auto-reconcile confirmed Afdian order(s) into SHA-256 chain"
+            git push origin HEAD:main
+          else
+            echo "No new orders to commit."
+          fi

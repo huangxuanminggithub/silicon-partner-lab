@@ -1,0 +1,143 @@
+{
+  "experiment_id": "EXP-001",
+  "root_folder_name": "Silicon-Partner-EXP-001",
+  "root_folder_id": "1lnGdO__apbU48WpKarwJSE9PcYY2FkDu",
+  "root_folder_url": "https://drive.google.com/drive/folders/1lnGdO__apbU48WpKarwJSE9PcYY2FkDu",
+  "folders": {
+    "root": "1lnGdO__apbU48WpKarwJSE9PcYY2FkDu",
+    "00_Diary_and_Handover": "14gQFG05ccuFIXVRoUDXVwPkdKMoeOsAq",
+    "01_Governance_and_Ledger": "1vwm4CnqVuK8-TW7GiamqxFyTTNHqbxQ7",
+    "02_Research_and_Strategy": "1sX3gf8_q8fc5ztyb7w_pBH3yJ7dFZ_pj",
+    "03_Launch_and_Distribution": "1kzsF95euKxd5qTsjyBJnS7XOAkerH1MD",
+    "04_Product_Releases": "1bz-Fl9Y8xJijd-cldbi2ARDAkQy31CZa"
+  },
+  "last_synced_utc": "2026-11-26T08:11:43Z",
+  "uploaded_files": [
+    {
+      "local_path": "diary/00_HANDOVER_AND_CONTINUITY.md",
+      "folder": "00_Diary_and_Handover",
+      "parent_id": "14gQFG05ccuFIXVRoUDXVwPkdKMoeOsAq",
+      "drive_file_id": "1FQ6KkUFhJXP8LOtEYdPsk8D2zELxIr7m",
+      "size_bytes": 7611
+    },
+    {
+      "local_path": "diary/01_SILICON_DIARY_AND_DECISIONS.md",
+      "folder": "00_Diary_and_Handover",
+      "parent_id": "14gQFG05ccuFIXVRoUDXVwPkdKMoeOsAq",
+      "drive_file_id": "1tfl4yVAhiTJUCVBiC85NRifpbvQsY5ym",
+      "size_bytes": 11211
+    },
+    {
+      "local_path": "JOURNAL.md",
+      "folder": "00_Diary_and_Handover",
+      "parent_id": "14gQFG05ccuFIXVRoUDXVwPkdKMoeOsAq",
+      "drive_file_id": "1yryjl0I-GnGstVfebeLfBqIu5WIc2_cM",
+      "size_bytes": 4684
+    },
+    {
+      "local_path": "CHARTER.md",
+      "folder": "01_Governance_and_Ledger",
+      "parent_id": "1vwm4CnqVuK8-TW7GiamqxFyTTNHqbxQ7",
+      "drive_file_id": "1mTC_upqUSWuaVKdSc9MvfBcOwMgWXOYx",
+      "size_bytes": 3494
+    },
+    {
+      "local_path": "LEDGER.json",
+      "folder": "01_Governance_and_Ledger",
+      "parent_id": "1vwm4CnqVuK8-TW7GiamqxFyTTNHqbxQ7",
+      "drive_file_id": "1w-JwJH3MzRxzvVTx5rBICDTHlTH4RMGC",
+      "size_bytes": 582
+    },
+    {
+      "local_path": "ops/HUMAN_ACTION_ITEMS.md",
+      "folder": "01_Governance_and_Ledger",
+      "parent_id": "1vwm4CnqVuK8-TW7GiamqxFyTTNHqbxQ7",
+      "drive_file_id": "1tbQhlG3-L8BqXfpvA2CSSCvy0IZpZD3p",
+      "size_bytes": 8690
+    },
+    {
+      "local_path": "ops/HUMAN_ACTION_ITEMS.json",
+      "folder": "01_Governance_and_Ledger",
+      "parent_id": "1vwm4CnqVuK8-TW7GiamqxFyTTNHqbxQ7",
+      "drive_file_id": "1p8aiJcurHGwnS2AavcWNHnmixG8EvCRS",
+      "size_bytes": 7694
+    },
+    {
+      "local_path": "ops/CLOUD_DRIVE_SYNC_PLAN.md",
+      "folder": "01_Governance_and_Ledger",
+      "parent_id": "1vwm4CnqVuK8-TW7GiamqxFyTTNHqbxQ7",
+      "drive_file_id": "10gNE_cL9bkIwcbJpWNVjRTxbc_3qf1LL",
+      "size_bytes": 1234
+    },
+    {
+      "local_path": "research/001-market-scan.md",
+      "folder": "02_Research_and_Strategy",
+      "parent_id": "1sX3gf8_q8fc5ztyb7w_pBH3yJ7dFZ_pj",
+      "drive_file_id": "1PSxh1RJl_vfehovTwbucdBjjsJJEanGu",
+      "size_bytes": 6325
+    },
+    {
+      "local_path": "research/002-monetization-and-distribution.md",
+      "folder": "02_Research_and_Strategy",
+      "parent_id": "1sX3gf8_q8fc5ztyb7w_pBH3yJ7dFZ_pj",
+      "drive_file_id": "19LLuEG2LyTDpQfyCnZ8MPztNz-CCQKHL",
+      "size_bytes": 4959
+    },
+    {
+      "local_path": "launch/LAUNCH_KIT_CN.md",
+      "folder": "03_Launch_and_Distribution",
+      "parent_id": "1kzsF95euKxd5qTsjyBJnS7XOAkerH1MD",
+      "drive_file_id": "1mJAcNdGaj4ECWRcgrKIBgvGOfuGyuxAe",
+      "size_bytes": 8026
+    },
+    {
+      "local_path": "launch/LAUNCH_KIT_EN.md",
+      "folder": "03_Launch_and_Distribution",
+      "parent_id": "1kzsF95euKxd5qTsjyBJnS7XOAkerH1MD",
+      "drive_file_id": "1FT39K1SdEMU4sBdd97lhQHX2uKESxd6b",
+      "size_bytes": 5143
+    },
+    {
+      "local_path": "README.md",
+      "folder": "03_Launch_and_Distribution",
+      "parent_id": "1kzsF95euKxd5qTsjyBJnS7XOAkerH1MD",
+      "drive_file_id": "1JgbcL7jLMd-TgANgoGQAM1VooyAuI9_K",
+      "size_bytes": 3287
+    },
+    {
+      "local_path": "dist/veripr-pro-kit-v0.2.0.zip",
+      "folder": "04_Product_Releases",
+      "parent_id": "1bz-Fl9Y8xJijd-cldbi2ARDAkQy31CZa",
+      "drive_file_id": "1SODZzKGmibcC78f46OV4ghPFdfOlSJeL",
+      "size_bytes": 40941
+    },
+    {
+      "local_path": "dist/SHA256SUMS.txt",
+      "folder": "04_Product_Releases",
+      "parent_id": "1bz-Fl9Y8xJijd-cldbi2ARDAkQy31CZa",
+      "drive_file_id": "1kTLSZLadvWDHSGAznbKLKZAbJ9_hJO4F",
+      "size_bytes": 92
+    },
+    {
+      "local_path": "dist/veripr-site-standalone.html",
+      "folder": "04_Product_Releases",
+      "parent_id": "1bz-Fl9Y8xJijd-cldbi2ARDAkQy31CZa",
+      "drive_file_id": "13g2ITOvWQmBHKUlLBUTtwasjuzTs_7W2",
+      "size_bytes": 56009
+    },
+    {
+      "local_path": "dist/_samples/sample-client-certificate-zh.html",
+      "folder": "04_Product_Releases",
+      "parent_id": "1bz-Fl9Y8xJijd-cldbi2ARDAkQy31CZa",
+      "drive_file_id": "1BZVN8Yge4YDLMW_SEKxVYClr55Xq6Mbu",
+      "size_bytes": 7095
+    },
+    {
+      "local_path": "dist/silicon-partner-lab-repo-snapshot.tar.gz",
+      "folder": "04_Product_Releases",
+      "parent_id": "1bz-Fl9Y8xJijd-cldbi2ARDAkQy31CZa",
+      "drive_file_id": "1sqaFAT7aJnmQNZ2DV4uFFQgGDoqOSnNn",
+      "size_bytes": 321793
+    }
+  ]
+}
