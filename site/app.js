@@ -1,8 +1,8 @@
 /* VeriPR Browser Deterministic Diff Auditor & Bilingual Controller */
 
 const CONFIG = {
-  // Human partner: replace these placeholders once GitHub / 爱发电 / Polar.sh links are live (see ops/HUMAN_ACTION_ITEMS.md)
-  repoUrl: "",
+  // Live open-source repository URL; add buyUrlCn / buyUrlGlobal once H-004 payment links are created
+  repoUrl: "https://github.com/huangxuanminggithub/silicon-partner-lab",
   buyUrlCn: "",
   buyUrlGlobal: "",
   backerUrlCn: "",

@@ -2,15 +2,15 @@
 
 - **当前阶段**：Phase 1 — Earn First Confirmed Dollar ($0 -> $1+)
 - **最后更新（UTC）**：`2026-11-26T07:48:00Z`
-- **总体进度**：已完成 `0/8` 项 ｜ 剩余 P0 阻塞项：`3` 项
+- **总体进度**：已完成 `1/8` 项 ｜ 剩余 P0 阻塞项：`2` 项
 - **总计需要人类垫付资金**：`$0.00`（当前所有 P0/P1/P2 事项均为零成本冷启动）
 
 ## 一览表
 
 | ID | 优先级 | 状态 | 事项 | 预计耗时 | 资金成本 |
 | --- | --- | --- | --- | --- | --- |
-| `H-001` | `P0` | ⬜ TODO | 连接 Google Drive 插件（gdrive），允许将全部持久化文件同步至云端硬盘 | ~1 分钟 | `$0.00` |
-| `H-002` | `P0` | ⬜ TODO | 连接 GitHub 插件（github）或手动新建公开仓库并推送 silicon-partner-lab | ~3 分钟 | `$0.00` |
+| `H-001` | `P0` | ✅ DONE | 连接 Google Drive 插件（gdrive），允许将全部持久化文件同步至云端硬盘 | ~1 分钟 | `$0.00` |
+| `H-002` | `P0` | ⬜ TODO | 在 GitHub 网页新建空公开仓库 silicon-partner-lab 并授权集成，让我一键推库上线 | ~1 分钟 | `$0.00` |
 | `H-003` | `P1` | ⬜ TODO | 免费开启 GitHub Pages（或 Cloudflare Pages）上线 VeriPR 在线体验台 | ~2 分钟 | `$0.00` |
 | `H-004` | `P0` | ⬜ TODO | 在爱发电（afdian.com）或面包多（mbd.pub）零门槛上架 VeriPR Pro 早鸟包（¥49） | ~10 分钟 | `$0.00` |
 | `H-005` | `P1` | ⬜ TODO | 在 V2EX /go/create、即刻、掘金/知乎发布首波中文冷启动实测贴 | ~10 分钟 | `$0.00` |
@@ -23,20 +23,22 @@
 ## 逐条操作指引
 
 ### H-001 [P0] 连接 Google Drive 插件（gdrive），允许将全部持久化文件同步至云端硬盘
-- **状态**：⬜ TODO ｜ **分类**：`CLOUD_PERSISTENCE` ｜ **耗时**：~1 分钟 ｜ **资金成本**：`$0.00`
+- **状态**：✅ DONE ｜ **分类**：`CLOUD_PERSISTENCE` ｜ **耗时**：~1 分钟 ｜ **资金成本**：`$0.00`
 - **为什么必须人类协助**：当前会话未授权任何外部插件（Connected plugins: none），AI 不能擅自访问外部云盘。
 - **具体执行步骤**：
   1. 在对话中点击 Google Drive（gdrive）连接卡片完成授权（或在 Customizations 页面开启 Google Drive 插件）。
-  2. 授权后发送一条新消息通知我，我将立即把 cloud_sync_bundle/ 中的全部文件同步到你云端硬盘的 Silicon-Partner-EXP-001/ 文件夹。
-- **完成后立即解锁**：所有宪章、账本、实验日记、待办清单、文案包与 Pro 交付 ZIP 实时云端持久化备份。
+  2. 授权后发送一条新消息通知我，我将立即把全部持久化文件、日记、跨服务器交接手册与完整源码快照同步到 Silicon-Partner-EXP-001/ 文件夹。
+- **完成后立即解锁**：所有宪章、账本、硅基决策日记、跨服务器交接手册、待办清单、文案包、Pro 交付 ZIP 与源码灾备快照已云端持久化。
+- **执行备注**：已完成！已创建云端硬盘根目录 Silicon-Partner-EXP-001（ID: 1lnGdO__apbU48WpKarwJSE9PcYY2FkDu）及 5 个子目录，并完成全量上传。
 
-### H-002 [P0] 连接 GitHub 插件（github）或手动新建公开仓库并推送 silicon-partner-lab
-- **状态**：⬜ TODO ｜ **分类**：`INFRA_DISTRIBUTION` ｜ **耗时**：~3 分钟 ｜ **资金成本**：`$0.00`
-- **为什么必须人类协助**：AI 没有独立 GitHub 账号与推库凭证。
+### H-002 [P0] 在 GitHub 网页新建空公开仓库 silicon-partner-lab 并授权集成，让我一键推库上线
+- **状态**：⬜ TODO ｜ **分类**：`INFRA_DISTRIBUTION` ｜ **耗时**：~1 分钟 ｜ **资金成本**：`$0.00`
+- **为什么必须人类协助**：GitHub 插件已登录 huangxuanminggithub，但实测当前 GitHub App 集成 Token 不具备 createRepository 建仓权限（GraphQL: Resource not accessible by integration）。
 - **具体执行步骤**：
-  1. 方式 A（最省事）：点击对话中的 GitHub 连接卡片授权，我来直接建公开仓库并推送全部代码。
-  2. 方式 B（手动）：在 GitHub 新建公开仓库 silicon-partner-lab，推送 /home/antigravity/silicon-partner-lab 本地分支。
-- **完成后立即解锁**：VeriPR 开源代码与 $100 透明账本公开可验证，并解锁免费 GitHub Pages 与 GitHub Marketplace。
+  1. 打开 https://github.com/new ，新建公开（Public）空仓库，仓库名填 silicon-partner-lab（不勾选 README / .gitignore）。
+  2. 如插件仅授权了部分仓库，在 GitHub Installed Apps 设置中将该仓库加入授权列表，然后发消息告诉我，我立即执行 git push 推送全部代码并自动触发 CI 与 GitHub Pages。
+- **完成后立即解锁**：VeriPR 开源代码与 $100 透明账本正式公开发布，自动触发 GitHub Actions CI 与 GitHub Pages 在线体验台。
+- **执行备注**：2026-11-26 实测 gh auth status 已登录 huangxuanminggithub，仅缺建仓权限。
 
 ### H-003 [P1] 免费开启 GitHub Pages（或 Cloudflare Pages）上线 VeriPR 在线体验台
 - **状态**：⬜ TODO ｜ **分类**：`LIVE_DEMO_HOSTING` ｜ **耗时**：~2 分钟 ｜ **资金成本**：`$0.00`

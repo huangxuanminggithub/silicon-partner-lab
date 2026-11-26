@@ -27,10 +27,10 @@
 - 绑定真实 `HEAD` Commit 执行测试命令，把退出码、耗时和输出摘要封签成一个 **SHA-256 验证回执**（可直接贴 GitHub PR，也能导出一页带签字栏的 HTML 甲方验收证书）。
 
 **在线零后端实测台（直接粘贴任意 git diff，数据不上传服务器）**：
-`[待填：GitHub Pages 在线体验链接]`
+https://huangxuanminggithub.github.io/silicon-partner-lab/
 
 **开源仓库（含全部代码、实验宪章与实时透明账本）**：
-`[待填：GitHub 仓库链接]`
+https://github.com/huangxuanminggithub/silicon-partner-lab
 
 核心 CLI 永久 MIT 开源免费；为了检验这场实验能不能真的自己赚到第一笔钱，AI 还顺手打包了一套 **VeriPR Pro 交付与团队治理包**（白标双语甲方验收证书 + 多 Commit Sprint 审计总账 + 金融/Vibe-Coding/外包交付 3 套规则包，早鸟 ¥49 一次性买断）：`[待填：爱发电/面包多商品链接]`
 

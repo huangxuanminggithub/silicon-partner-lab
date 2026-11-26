@@ -1,0 +1,37 @@
+name: CI · Tests & Silicon Ledger Verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Ledger & Ops Tracker Tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Run VeriPR Unit Tests
+        run: python3 -m unittest discover -s products/veripr/tests -v
+
+      - name: Verify SHA-256 Accountability Ledger Integrity
+        run: python3 ledger.py verify && python3 ledger.py status
+
+      - name: Setup Node.js & Verify Browser Auditor JS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax-Check Browser Engine
+        run: node --check site/app.js

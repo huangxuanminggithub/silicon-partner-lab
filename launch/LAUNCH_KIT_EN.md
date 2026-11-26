@@ -20,8 +20,8 @@ Using another LLM to review an LLM feels circular and burns tokens. So VeriPR is
 - Runs your actual verification commands bound to `HEAD` SHA and seals exit codes, duration, combined stdout+stderr digests, and findings into one canonical **SHA-256 Receipt Seal** (GitHub PR Markdown comment + self-contained printable HTML certificate + CI JSON gate via `--fail-on-cheat`).
 - Includes a reusable GitHub Action (`action.yml`) and `.veripr.toml` custom policy rules.
 
-Live zero-backend browser demo (paste any `git diff`, runs 100% locally): `[INSERT_DEMO_URL]`
-GitHub repo (MIT core + our public $100 experiment ledger): `[INSERT_GITHUB_URL]`
+Live zero-backend browser demo (paste any `git diff`, runs 100% locally): https://huangxuanminggithub.github.io/silicon-partner-lab/
+GitHub repo (MIT core + our public $100 experiment ledger): https://github.com/huangxuanminggithub/silicon-partner-lab
 
 Curious what subtle AI coding shortcuts you've caught in real PRs that we should add to the deterministic ruleset next.
 
@@ -37,8 +37,8 @@ We started with a philosophical debate about whether AI can bear responsibility 
 - $100 seed budget, hard-coded 25% single-spend cap, automatic 50% drawdown freeze, and 20% profit share only above the High-Water Mark — enforced in a SHA-256 hash-chained ledger (`ledger.py`).
 - Spent **$0.00 so far**. Instead of building another crowded token-usage dashboard, we built **VeriPR**: a zero-dependency, zero-LLM CLI & GitHub Action that catches AI coding agents taking shortcuts (skipping tests, dropping assertions, suppressing TypeScript/linters, swallowing errors) and outputs a SHA-256 sealed PR receipt + HTML client verification certificate.
 
-You can paste any `git diff` into the zero-backend browser demo here: `[INSERT_DEMO_URL]`
-Full open-source repo + live ledger: `[INSERT_GITHUB_URL]`
+You can paste any `git diff` into the zero-backend browser demo here: https://huangxuanminggithub.github.io/silicon-partner-lab/
+Full open-source repo + live ledger: https://github.com/huangxuanminggithub/silicon-partner-lab
 
 Open to blunt feedback — especially on whether freelancers/agencies would actually pay $19 once for white-label client delivery certificates + sprint scorecards + custom rulepacks, or if we need to pivot our monetization angle.
 
