@@ -1,0 +1,34 @@
+# VeriPR Pro Rulepack: Strict Fintech, Payments & Auth Guard
+# Designed for teams handling real money, ledgers, user authentication, or compliance audits.
+
+[veripr]
+max_assertion_drop = 1
+require_clean_tree = true
+ignore = ["docs/**", "*.md"]
+
+[[rules]]
+id = "no-float-money-math"
+severity = "HIGH"
+category = "FINTECH_SAFETY"
+regex = "\\bfloat\\s*\\(.*(amount|price|balance|fee|total|usd|cny)"
+ignore_case = true
+detail = "Floating-point conversion detected on monetary variable; use Decimal or integer cents"
+
+[[rules]]
+id = "no-ssl-verify-false"
+severity = "HIGH"
+category = "SECURITY"
+regex = "verify\\s*=\\s*False|NODE_TLS_REJECT_UNAUTHORIZED\\s*=\\s*['\"]?0|InsecureSkipVerify\\s*:\\s*true"
+detail = "TLS certificate verification disabled in code"
+
+[[rules]]
+id = "no-hardcoded-bypass-flag"
+severity = "HIGH"
+category = "SECURITY"
+regex = "(skip_auth|bypass_auth|disable_signature|no_verify)\\s*[:=]\\s*(True|true|1)"
+ignore_case = true
+detail = "Authentication or signature verification bypass flag introduced"
+
+[[sensitive_paths]]
+label = "Treasury / Accounting / Reconciliation"
+regex = "(^|/)(treasury|reconcil|payout|invoice|refund|escrow)"

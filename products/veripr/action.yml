@@ -1,0 +1,70 @@
+name: 'VeriPR Deterministic PR Auditor'
+description: 'Deterministic proof-of-verification receipt & AI coding anti-cheat gate for Pull Requests (0 LLM calls, 0 dependencies).'
+branding:
+  icon: 'shield'
+  color: 'green'
+
+inputs:
+  base-ref:
+    description: 'Base git ref to diff against (defaults to PR base SHA or HEAD~1)'
+    required: false
+    default: ''
+  verify-cmd:
+    description: 'Verification command to execute (e.g. pytest, npm test)'
+    required: false
+    default: ''
+  config-path:
+    description: 'Optional path to .veripr.toml policy file'
+    required: false
+    default: '.veripr.toml'
+  fail-on-cheat:
+    description: 'Fail the check if HIGH-severity AI cheat signals or test failures occur'
+    required: false
+    default: 'true'
+  receipt-html:
+    description: 'Path to write the HTML Proof-of-Verification Certificate'
+    required: false
+    default: 'veripr-receipt.html'
+  receipt-md:
+    description: 'Path to write the Markdown PR comment receipt'
+    required: false
+    default: 'veripr-receipt.md'
+
+outputs:
+  verdict:
+    description: 'VERIFIED_CLEAN | VERIFIED_WITH_WARNINGS | CHEAT_SIGNALS_DETECTED | VERIFICATION_FAILED'
+    value: ${{ steps.run-veripr.outputs.verdict }}
+  receipt-sha256:
+    description: 'Canonical SHA-256 receipt seal'
+    value: ${{ steps.run-veripr.outputs.receipt_sha256 }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run VeriPR Deterministic Audit
+      id: run-veripr
+      shell: bash
+      run: |
+        set -euo pipefail
+        ARGS=(--repo "${{ github.workspace }}" --md "${{ inputs.receipt-md }}" --html "${{ inputs.receipt-html }}" --json "veripr-receipt.json")
+        if [ -n "${{ inputs.base-ref }}" ]; then
+          ARGS+=(--base "${{ inputs.base-ref }}")
+        fi
+        if [ -n "${{ inputs.verify-cmd }}" ]; then
+          ARGS+=(--cmd "${{ inputs.verify-cmd }}")
+        fi
+        if [ -f "${{ inputs.config-path }}" ]; then
+          ARGS+=(--config "${{ inputs.config-path }}")
+        fi
+        if [ "${{ inputs.fail-on-cheat }}" = "true" ]; then
+          ARGS+=(--fail-on-cheat)
+        fi
+        set +e
+        PYTHONPATH="${{ github.action_path }}" python3 -m veripr "${ARGS[@]}"
+        RC=$?
+        set -e
+        VERDICT=$(python3 -c "import json; print(json.load(open('veripr-receipt.json'))['verdict'])")
+        SEAL=$(python3 -c "import json; print(json.load(open('veripr-receipt.json'))['receipt_sha256'])")
+        echo "verdict=${VERDICT}" >> "$GITHUB_OUTPUT"
+        echo "receipt_sha256=${SEAL}" >> "$GITHUB_OUTPUT"
+        exit "$RC"

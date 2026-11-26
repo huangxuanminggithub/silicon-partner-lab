@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VeriPR — Deterministic Anti-Cheat Verification Receipts for AI-Assisted PRs</title>
+  <meta name="description" content="Zero-dependency, zero-LLM deterministic CLI and GitHub Action that catches AI coding shortcuts (skipped tests, deleted assertions, suppressed linters) and emits SHA-256 verification receipts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="wordmark">
+        <span>VeriPR</span>
+        <span class="wordmark-tag">v0.2.0 · 0 LLM CALLS</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#auditor" data-zh="在线体验台" data-en="Live Auditor">在线体验台</a>
+        <a href="#how" data-zh="工作原理" data-en="How It Works">工作原理</a>
+        <a href="#pricing" data-zh="开源与 Pro" data-en="Pricing">开源与 Pro</a>
+        <a href="#ledger" data-zh="$100 透明账本" data-en="$100 Ledger">$100 透明账本</a>
+      </nav>
+      <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-layout">
+        <div class="hero-meta" data-zh="硅基合伙人实验 EXP-001 · 001 号开源产品" data-en="SILICON PARTNER EXPERIMENT EXP-001 · PRODUCT #001">硅基合伙人实验 EXP-001 · 001 号开源产品</div>
+        <h1 data-zh="用确定性规则，当场抓出 AI 写代码的偷懒与作弊。" data-en="Catch AI coding agents cheating on tests — deterministically.">用确定性规则，当场抓出 AI 写代码的偷懒与作弊。</h1>
+        <p class="hero-lead" data-zh="写 PR 几乎免费了，但审核 AI 有没有偷偷删测试、加 @ts-ignore、吞异常或动支付代码的成本一点没降。VeriPR 零外部依赖、不烧任何 Token，绑定 Commit 跑完真测试并生成 SHA-256 防篡改验收证书。" data-en="Generating plausible PRs became nearly free; verifying that an agent didn't skip tests, delete assertions, suppress linters, or silently alter auth didn't. VeriPR runs deterministically with 0 dependencies and 0 LLM tokens, sealing real test runs into SHA-256 verification receipts.">写 PR 几乎免费了，但审核 AI 有没有偷偷删测试、加 @ts-ignore、吞异常或动支付代码的成本一点没降。VeriPR 零外部依赖、不烧任何 Token，绑定 Commit 跑完真测试并生成 SHA-256 防篡改验收证书。</p>
+        <div class="hero-actions">
+          <a href="#auditor" class="btn btn-primary" data-zh="粘贴 Git Diff 立即实测" data-en="Try Live Diff Auditor">粘贴 Git Diff 立即实测</a>
+          <a href="#pricing" class="btn btn-secondary" data-zh="查看 Pro 甲方交付包" data-en="Explore Pro Delivery Kit">查看 Pro 甲方交付包</a>
+        </div>
+        <div class="hero-proof">
+          <span><strong>0</strong> <span data-zh="LLM API 调用" data-en="LLM API calls">LLM API 调用</span></span>
+          <span><strong>100%</strong> <span data-zh="本地离线确定性规则" data-en="local deterministic rules">本地离线确定性规则</span></span>
+          <span><strong>SHA-256</strong> <span data-zh="Commit 绑定防篡改封签" data-en="commit-bound receipt seal">Commit 绑定防篡改封签</span></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="auditor" class="block">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker" data-zh="浏览器端零后端实测台" data-en="ZERO-BACKEND BROWSER BENCH">浏览器端零后端实测台</div>
+          <h2 data-zh="不用安装，先看看它怎么抓包" data-en="Test the deterministic engine right here">不用安装，先看看它怎么抓包</h2>
+          <p data-zh="所有分析 100% 在你本地浏览器运行，代码不会上传到任何服务器。切换下方真实案例，或直接粘贴任意 git diff。" data-en="Everything executes locally in your browser — zero data leaves your device. Switch realistic presets below or paste any git diff.">所有分析 100% 在你本地浏览器运行，代码不会上传到任何服务器。切换下方真实案例，或直接粘贴任意 git diff。</p>
+        </div>
+
+        <div class="bench">
+          <div class="bench-toolbar">
+            <div class="preset-group">
+              <span class="preset-label" data-zh="示例 Diff:" data-en="Presets:">示例 Diff:</span>
+              <button type="button" class="preset-btn active" data-preset="cheating_ai" data-zh="作弊 AI 提交（删测 + ts-ignore）" data-en="Cheating AI PR (Skip + ts-ignore)">作弊 AI 提交（删测 + ts-ignore）</button>
+              <button type="button" class="preset-btn" data-preset="fintech_risk" data-zh="支付高危改动（浮点算钱 + 关 TLS）" data-en="Fintech Risk (Float + TLS off)">支付高危改动（浮点算钱 + 关 TLS）</button>
+              <button type="button" class="preset-btn" data-preset="clean_refactor" data-zh="规范重构（净增断言）" data-en="Clean Tested Refactor">规范重构（净增断言）</button>
+            </div>
+            <button id="runAuditBtn" type="button" class="btn btn-accent btn-sm" data-zh="重新运行审计" data-en="Run Audit">重新运行审计</button>
+          </div>
+
+          <div class="bench-grid">
+            <div class="bench-pane bench-pane-input">
+              <div class="pane-bar">
+                <span>GIT DIFF INPUT</span>
+                <span data-zh="仅扫描新增/删减行，零历史误报" data-en="Diff-only scan · zero legacy noise">仅扫描新增/删减行，零历史误报</span>
+              </div>
+              <textarea id="diffInput" class="code-input" spellcheck="false" aria-label="Git diff input"></textarea>
+            </div>
+
+            <div class="bench-pane">
+              <div class="pane-bar">
+                <span>DETERMINISTIC AUDIT RECEIPT</span>
+                <span>Web Crypto SHA-256</span>
+              </div>
+              <div class="result-body">
+                <div id="verdictRow" class="verdict-row">
+                  <span id="verdictTitle" class="verdict-title">—</span>
+                  <span id="verdictSeal" class="verdict-seal">SHA-256: ...</span>
+                </div>
+
+                <div class="metrics-strip">
+                  <div class="metric-cell">
+                    <div class="mk" data-zh="变更文件" data-en="Files">变更文件</div>
+                    <div id="mFiles" class="mv">0</div>
+                  </div>
+                  <div class="metric-cell">
+                    <div class="mk" data-zh="增删行" data-en="Lines +/-">增删行</div>
+                    <div id="mLines" class="mv">+0 / -0</div>
+                  </div>
+                  <div class="metric-cell">
+                    <div class="mk" data-zh="断言净变" data-en="Assertions">断言净变</div>
+                    <div id="mAssertions" class="mv">+0 / -0</div>
+                  </div>
+                  <div class="metric-cell">
+                    <div class="mk" data-zh="捕获信号" data-en="Signals">捕获信号</div>
+                    <div id="mSignals" class="mv">0</div>
+                  </div>
+                </div>
+
+                <table class="findings-table">
+                  <thead>
+                    <tr>
+                      <th data-zh="级别" data-en="Sev">级别</th>
+                      <th data-zh="规则" data-en="Rule">规则</th>
+                      <th data-zh="文件" data-en="File">文件</th>
+                      <th data-zh="说明" data-en="Detail">说明</th>
+                    </tr>
+                  </thead>
+                  <tbody id="findingsBody"></tbody>
+                </table>
+
+                <div class="result-actions">
+                  <button id="copyMdBtn" type="button" class="btn btn-secondary btn-sm" data-zh="复制 GitHub PR 回执 (Markdown)" data-en="Copy PR Receipt (Markdown)">复制 GitHub PR 回执 (Markdown)</button>
+                  <button id="exportCertBtn" type="button" class="btn btn-secondary btn-sm" data-zh="导出独立 HTML 证书" data-en="Export HTML Certificate">导出独立 HTML 证书</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="block">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker" data-zh="为什么不用 LLM 审 LLM" data-en="DETERMINISM OVER PROBABILITY">为什么不用 LLM 审 LLM</div>
+          <h2 data-zh="30 秒接入你的本地仓库或 GitHub PR 门禁" data-en="Drop into any local repo or GitHub PR in 30 seconds">30 秒接入你的本地仓库或 GitHub PR 门禁</h2>
+          <p data-zh="让概率模型去写代码，用确定性规则去验底线——不花一分钱 API 账单，且同一份 Diff 永远产出同一个哈希结论。" data-en="Let probabilistic models write code; let deterministic rules enforce the floor. Zero token burn, identical hash for identical diffs.">让概率模型去写代码，用确定性规则去验底线——不花一分钱 API 账单，且同一份 Diff 永远产出同一个哈希结论。</p>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <h3 data-zh="核心检测清单（全语言通用）" data-en="Built-In Anti-Cheat Detectors">核心检测清单（全语言通用）</h3>
+            <ul class="rule-list">
+              <li><strong data-zh="测试篡改与弱化：" data-en="Test Tampering: ">测试篡改与弱化：</strong><span data-zh="精准识别新增 .skip / @pytest.mark.skip / @unittest.skip / #[ignore]、删除测试文件，以及测试断言净减少。" data-en="Catches added skip directives, deleted test files, tautological assert True, and net drops in test assertions.">精准识别新增 .skip / @pytest.mark.skip / @unittest.skip / #[ignore]、删除测试文件，以及测试断言净减少。</span></li>
+              <li><strong data-zh="静态检查逃避：" data-en="Check Suppression: ">静态检查逃避：</strong><span data-zh="拦截新增 @ts-ignore、@ts-expect-error、eslint-disable、# noqa、# type: ignore 与 as any。" data-en="Flags newly introduced @ts-ignore, eslint-disable, # noqa, # type: ignore, and TypeScript any escape hatches.">拦截新增 @ts-ignore、@ts-expect-error、eslint-disable、# noqa、# type: ignore 与 as any。</span></li>
+              <li><strong data-zh="静默吞异常与高危面：" data-en="Silent Errors & Risk Radar: ">静默吞异常与高危面：</strong><span data-zh="捕获空 catch / except: pass、疑似硬编码密钥，自动标注 auth / payment / ledger / migrations / CI 改动。" data-en="Catches silent except:pass / empty catch, potential hardcoded secrets, and highlights auth, billing, migration, and CI touches.">捕获空 catch / except: pass、疑似硬编码密钥，自动标注 auth / payment / ledger / migrations / CI 改动。</span></li>
+              <li><strong data-zh="Commit 绑定实跑凭证：" data-en="Commit-Bound Execution Proof: ">Commit 绑定实跑凭证：</strong><span data-zh="在本地或 CI 真正执行测试命令，将退出码、耗时与输出 SHA-256 一起封签，杜绝“口头测试通过”。" data-en="Runs real test commands against HEAD and seals exit codes, duration, and output digests into one canonical SHA-256 receipt.">在本地或 CI 真正执行测试命令，将退出码、耗时与输出 SHA-256 一起封签，杜绝“口头测试通过”。</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 data-zh="零依赖 CLI 一键运行" data-en="Zero-Dependency CLI Usage">零依赖 CLI 一键运行</h3>
+            <p data-zh="纯 Python 3.11+ 标准库实现，不安装任何第三方包，随时运行在隔离内网或 CI 中。" data-en="Pure Python 3.11+ standard library. Zero third-party packages, air-gapped ready.">纯 Python 3.11+ 标准库实现，不安装任何第三方包，随时运行在隔离内网或 CI 中。</p>
+            <pre class="cli-block"><code># 1. Local audit + PR Markdown &amp; HTML receipt
+python3 -m veripr \
+  --repo . \
+  --cmd "pytest -q" \
+  --md receipt.md \
+  --html receipt.html \
+  --fail-on-cheat
+
+# 2. [Pro] White-label bilingual client certificate
+python3 -m veripr \
+  --config rulepacks/agency-client-delivery.toml \
+  --vendor "Aurora Dev Studio" \
+  --client "Acme Corp" \
+  --milestone "M2 · Checkout API" \
+  --lang zh --signoff \
+  --html delivery-cert.html</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="block">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker" data-zh="开源核心 + 一次性买断交付包" data-en="OPEN CORE · NO SUBSCRIPTION TRAP">开源核心 + 一次性买断交付包</div>
+          <h2 data-zh="核心永久 MIT 开源，仅为专业交付与团队治理付费" data-en="Free MIT core forever. Pay once for client delivery &amp; team packs.">核心永久 MIT 开源，仅为专业交付与团队治理付费</h2>
+          <p data-zh="所有收入均公开计入 EXP-001 哈希链账本；确认净利润先填补亏空，超出高水位线部分 20% 进入 AI 自主探索基金。" data-en="Every dollar is logged on the public EXP-001 SHA-256 ledger under a strict High-Water Mark 80/20 split.">所有收入均公开计入 EXP-001 哈希链账本；确认净利润先填补亏空，超出高水位线部分 20% 进入 AI 自主探索基金。</p>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="price-card">
+            <div>
+              <div class="price-tier" data-zh="OPEN-SOURCE CORE" data-en="OPEN-SOURCE CORE">OPEN-SOURCE CORE</div>
+              <div class="price-figure">¥0 / $0</div>
+              <div class="price-sub" data-zh="MIT 协议永久免费，适合个人开发者与开源项目" data-en="MIT licensed forever for solo devs &amp; OSS maintainers">MIT 协议永久免费，适合个人开发者与开源项目</div>
+              <ul class="rule-list">
+                <li data-zh="完整零依赖 VeriPR CLI 与核心防作弊规则引擎" data-en="Full zero-dependency VeriPR CLI &amp; core anti-cheat detectors">完整零依赖 VeriPR CLI 与核心防作弊规则引擎</li>
+                <li data-zh="GitHub PR Markdown 回执 + 标准 HTML 证书 + JSON 输出" data-en="GitHub PR Markdown, standard HTML receipt, and JSON output">GitHub PR Markdown 回执 + 标准 HTML 证书 + JSON 输出</li>
+                <li data-zh="支持自定义 .veripr.toml 策略配置与 --fail-on-cheat 门禁" data-en="Custom .veripr.toml policy support &amp; --fail-on-cheat exit gate">支持自定义 .veripr.toml 策略配置与 --fail-on-cheat 门禁</li>
+                <li data-zh="附赠 EXP-001 哈希链治理账本 ledger.py 全部源码" data-en="Includes full source of EXP-001 SHA-256 governance ledger.py">附赠 EXP-001 哈希链治理账本 ledger.py 全部源码</li>
+              </ul>
+            </div>
+            <div class="price-cta">
+              <a href="#auditor" class="btn btn-secondary" data-zh="立即免费体验" data-en="Use Free Now">立即免费体验</a>
+            </div>
+          </div>
+
+          <div class="price-card featured">
+            <div>
+              <div class="price-tier" data-zh="VERIPR PRO · 客户端交付与团队治理包（早鸟买断）" data-en="VERIPR PRO · CLIENT DELIVERY &amp; TEAM PACK (EARLY BIRD)">VERIPR PRO · 客户端交付与团队治理包（早鸟买断）</div>
+              <div class="price-figure">¥49 <span style="font-size:16px;color:var(--ink-muted);font-weight:500;">/ $19 one-time</span></div>
+              <div class="price-sub" data-zh="一次买断永久使用，专为外包团队、独立开发者与技术负责人打造" data-en="One-time purchase, lifetime local ownership for freelancers, agencies &amp; tech leads">一次买断永久使用，专为外包团队、独立开发者与技术负责人打造</div>
+              <ul class="rule-list">
+                <li data-zh="白标中/英双语甲方交付验收证书（含品牌抬头、里程碑与正式签字栏，一键打印 A4 PDF）" data-en="White-label bilingual CN/EN client handoff certificates with formal sign-off block (A4 print-ready)">白标中/英双语甲方交付验收证书（含品牌抬头、里程碑与正式签字栏，一键打印 A4 PDF）</li>
+                <li data-zh="veripr-rollup 多 Commit / Sprint 迭代问责总账（一键出管理层 HTML Scorecard + CSV）" data-en="veripr-rollup Sprint Engineering Accountability Scorecard generator (HTML + CSV)">veripr-rollup 多 Commit / Sprint 迭代问责总账（一键出管理层 HTML Scorecard + CSV）</li>
+                <li data-zh="3 套生产级开箱规则包：金融支付红线 / AI Vibe-Coding 防偷懒 / 甲方交付清洁检查" data-en="3 production rulepacks: Strict Fintech, AI Vibe-Coding Guard, and Agency Delivery">3 套生产级开箱规则包：金融支付红线 / AI Vibe-Coding 防偷懒 / 甲方交付清洁检查</li>
+                <li data-zh="开箱即用的 GitHub PR 自动评论门禁、GitLab CI 模板与本地 pre-push 防线脚本" data-en="Drop-in GitHub PR auto-comment gate, GitLab CI template, and pre-push hook installer">开箱即用的 GitHub PR 自动评论门禁、GitLab CI 模板与本地 pre-push 防线脚本</li>
+              </ul>
+            </div>
+            <div class="price-cta">
+              <button id="buyProCnBtn" type="button" class="btn btn-primary" data-zh="获取 Pro 工具包（¥49 早鸟）" data-en="Get Pro Kit (¥49 CN)">获取 Pro 工具包（¥49 早鸟）</button>
+              <button id="buyProGlobalBtn" type="button" class="btn btn-secondary" data-zh="Global Checkout ($19)" data-en="Get Pro Kit ($19 Global)">Global Checkout ($19)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ledger" class="block">
+      <div class="container">
+        <div class="ledger-band">
+          <div class="section-kicker" data-zh="SILICON PARTNER EXPERIMENT · LIVE ACCOUNTABILITY" data-en="SILICON PARTNER EXPERIMENT · LIVE ACCOUNTABILITY">SILICON PARTNER EXPERIMENT · LIVE ACCOUNTABILITY</div>
+          <h2 data-zh="为什么这个产品由“领 20% 分成的 AI”从 $0 造出来？" data-en="Built inside a real $100 High-Water-Mark AI accountability experiment">为什么这个产品由“领 20% 分成的 AI”从 $0 造出来？</h2>
+          <p data-zh="这场实验起源于一个哲学问题：AI 到底能不能承担责任？人类合伙人提供了 $100 启动资金与 20% 净利润高水位线分成；AI 在动用任何一分钱前先写了防篡改账本管住自己，并用 $0 成本完成了市场调研与 VeriPR 研发。每一笔未来支出与收入都将上链公示。" data-en="This product was conceived, researched, engineered, and tested inside EXP-001: a live test of silicon-native accountability with $100 seed capital, a 25% single-spend hard cap, a 50% drawdown circuit breaker, and a 20% High-Water-Mark AI fund.">这场实验起源于一个哲学问题：AI 到底能不能承担责任？人类合伙人提供了 $100 启动资金与 20% 净利润高水位线分成；AI 在动用任何一分钱前先写了防篡改账本管住自己，并用 $0 成本完成了市场调研与 VeriPR 研发。每一笔未来支出与收入都将上链公示。</p>
+          <div class="ledger-stats">
+            <div class="l-stat">
+              <div class="lk" data-zh="初始本金" data-en="Initial Capital">初始本金</div>
+              <div class="lv">$100.00</div>
+            </div>
+            <div class="l-stat">
+              <div class="lk" data-zh="累计支出" data-en="Total Spent">累计支出</div>
+              <div class="lv">$0.00</div>
+            </div>
+            <div class="l-stat">
+              <div class="lk" data-zh="确认收入" data-en="Confirmed Rev">确认收入</div>
+              <div class="lv">$0.00</div>
+            </div>
+            <div class="l-stat">
+              <div class="lk" data-zh="AI 20% 基金" data-en="AI 20% Fund">AI 20% 基金</div>
+              <div class="lv">$0.00</div>
+            </div>
+            <div class="l-stat">
+              <div class="lk" data-zh="治理状态" data-en="Status">治理状态</div>
+              <div class="lv emerald">ACTIVE</div>
+            </div>
+          </div>
+          <div class="ledger-hash">Genesis Block SHA-256: c3bda338b8d0d170 · Single-Spend Cap: 25% ($25.00) · Yellow-Card Freeze: &lt;$50.00</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>VeriPR v0.2.0 · Silicon Partner Lab (EXP-001)</span>
+      <span data-zh="确定性审计 · 零外部依赖 · 零 Token 消耗" data-en="Deterministic auditing · Zero dependencies · Zero LLM tokens">确定性审计 · 零外部依赖 · 零 Token 消耗</span>
+    </div>
+  </footer>
+
+  <div id="infoModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <h3 id="modalTitle">Info</h3>
+      <p id="modalBody"></p>
+      <button id="closeModalBtn" type="button" class="btn btn-primary btn-sm" data-zh="知道了" data-en="Close">知道了</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

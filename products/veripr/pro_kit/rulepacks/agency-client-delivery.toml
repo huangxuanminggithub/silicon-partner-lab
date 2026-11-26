@@ -1,0 +1,28 @@
+# VeriPR Pro Rulepack: Freelance & Agency Client Delivery Gate
+# Run before packaging any milestone delivery or handing off code to a paying client.
+
+[veripr]
+max_assertion_drop = 1
+require_clean_tree = true
+ignore = ["docs/**", "*.md"]
+
+[[rules]]
+id = "localhost-hardcoded-url"
+severity = "MEDIUM"
+category = "DELIVERY_HYGIENE"
+regex = "https?://(localhost|127\\.0\\.0\\.1):\\d+"
+detail = "Hardcoded localhost URL found — ensure externalized via environment config before client handoff"
+
+[[rules]]
+id = "console-log-leftover"
+severity = "INFO"
+category = "DELIVERY_HYGIENE"
+regex = "\\bconsole\\.(log|debug)\\s*\\("
+detail = "Debug console.log statement left in production diff"
+
+[[rules]]
+id = "unhandled-not-implemented"
+severity = "HIGH"
+category = "INCOMPLETE_CODE"
+regex = "raise\\s+NotImplementedError|throw\\s+new\\s+Error\\(['\"]Not implemented"
+detail = "Unimplemented stub path present in client delivery diff"

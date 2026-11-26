@@ -6,6 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import veripr
+from veripr import BrandOptions, cli, config, rollup
 
 
 def git(cwd: Path, *args: str) -> None:
@@ -53,10 +54,6 @@ class TestVeriPR(unittest.TestCase):
         self.assertIn(r.receipt_sha256, veripr.render_html(r))
 
     def test_adversarial_ai_cheat_signals_detected(self) -> None:
-        # Simulate an AI agent cheating to make things pass:
-        # 1. Adds @unittest.skip and removes 3 assertions
-        # 2. Adds # type: ignore and silent except: pass
-        # 3. Touches sensitive auth/login.py path
         (self.repo / "test_app.py").write_text(
             "import unittest\n"
             "class T(unittest.TestCase):\n"
@@ -108,6 +105,63 @@ class TestVeriPR(unittest.TestCase):
         r = veripr.generate_receipt(self.repo)
         self.assertEqual(r.verdict, "CHEAT_SIGNALS_DETECTED")
         self.assertIn("test_app.py", r.test_files_deleted)
+
+    def test_toml_custom_policy_rulepack(self) -> None:
+        rulepack = (
+            Path(__file__).resolve().parent.parent
+            / "pro_kit"
+            / "rulepacks"
+            / "strict-fintech-payments.toml"
+        )
+        policy = config.load_policy(rulepack)
+        (self.repo / "billing.py").write_text(
+            "def charge(amount):\n    return float(amount) * 1.05\n", encoding="utf-8"
+        )
+        git(self.repo, "add", ".")
+        git(self.repo, "commit", "-m", "float billing")
+
+        r = veripr.generate_receipt(self.repo, policy=policy)
+        rules = {f.rule for f in r.findings}
+        self.assertEqual(r.verdict, "CHEAT_SIGNALS_DETECTED")
+        self.assertIn("no-float-money-math", rules)
+
+    def test_pro_bilingual_whitelabel_html_and_signoff(self) -> None:
+        (self.repo / "app.py").write_text("def add(a, b):\n    return a + b\n# ok\n", encoding="utf-8")
+        git(self.repo, "add", ".")
+        git(self.repo, "commit", "-m", "doc update")
+
+        r = veripr.generate_receipt(self.repo, commands=["python3 -m unittest test_app.py"])
+        html_doc = veripr.render_html(
+            r,
+            brand=BrandOptions(
+                vendor_name="极光工作室",
+                client_name="星辰科技",
+                project_name="支付网关 v2",
+                milestone="M1",
+                lang="zh",
+                include_signoff=True,
+            ),
+        )
+        self.assertIn("极光工作室", html_doc)
+        self.assertIn("星辰科技", html_doc)
+        self.assertIn("交付验收签字栏", html_doc)
+        self.assertIn("SHA-256 不可篡改封签", html_doc)
+
+    def test_pro_sprint_rollup_and_cli_fail_exit(self) -> None:
+        (self.repo / "app.py").write_text("def add(a, b):\n    return a + b  # type: ignore\n", encoding="utf-8")
+        git(self.repo, "add", ".")
+        git(self.repo, "commit", "-m", "suppress typecheck")
+
+        rows = rollup.audit_commit_range(self.repo, limit=5)
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(rows[0].verdict, "CHEAT_SIGNALS_DETECTED")
+        csv_text = rollup.render_rollup_csv(rows)
+        self.assertIn("CHEAT_SIGNALS_DETECTED", csv_text)
+        html_text = rollup.render_rollup_html("demo-repo", rows)
+        self.assertIn("Sprint Engineering Accountability Scorecard", html_text)
+
+        rc = cli.main(["--repo", str(self.repo), "--fail-on-cheat"])
+        self.assertEqual(rc, 1)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,15 @@
+VeriPR Pro Kit Commercial License (v0.2.0)
+Copyright (c) 2026 Silicon Partner Lab (EXP-001)
+
+The core VeriPR CLI (`veripr/`) is licensed separately under the MIT License.
+
+The assets inside `pro_kit/` (production rulepacks, CI/CD PR gate templates,
+pre-push hook scripts, bilingual white-label delivery templates, and packaged
+distribution bundles) are distributed as the VeriPR Pro Kit:
+
+- Personal inspection and non-commercial testing are permitted.
+- Commercial usage, team deployment, or generating client-facing delivery
+  certificates requires purchasing a one-time VeriPR Pro Kit license
+  (Early Bird ¥49 / $19).
+- All confirmed net proceeds are transparently recorded on the EXP-001
+  SHA-256 governance ledger (`LEDGER.json`).

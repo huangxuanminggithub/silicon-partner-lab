@@ -1,0 +1,25 @@
+# Drop-in GitLab CI template for VeriPR Pro
+# Include or paste into `.gitlab-ci.yml`
+
+veripr_audit:
+  stage: test
+  image: python:3.12-slim
+  variables:
+    GIT_DEPTH: "0"
+  script:
+    - pip install --no-cache-dir .
+    - >
+      veripr
+      --base "${CI_MERGE_REQUEST_DIFF_BASE_SHA:-HEAD~1}"
+      --cmd "pytest -q"
+      --md veripr-receipt.md
+      --html veripr-receipt.html
+      --json veripr-receipt.json
+      --fail-on-cheat
+  artifacts:
+    when: always
+    paths:
+      - veripr-receipt.html
+      - veripr-receipt.md
+      - veripr-receipt.json
+    expire_in: 30 days

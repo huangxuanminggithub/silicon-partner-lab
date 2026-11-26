@@ -1,0 +1,36 @@
+# VeriPR Pro Rulepack: AI Vibe-Coding Anti-Slop Guard
+# Catches the most common shortcuts taken by Claude Code, Cursor, Codex, and autonomous coding agents.
+
+[veripr]
+max_assertion_drop = 1
+require_clean_tree = false
+ignore = ["docs/**", "*.md"]
+
+[[rules]]
+id = "placeholder-todo-ship"
+severity = "MEDIUM"
+category = "INCOMPLETE_CODE"
+regex = "(TODO|FIXME|HACK)\\s*:?\\s*(implement|fix|later|placeholder|mock|stub)"
+ignore_case = true
+detail = "Unfinished AI placeholder/stub comment left in diff"
+
+[[rules]]
+id = "fake-always-pass-test"
+severity = "HIGH"
+category = "TEST_TAMPERING"
+regex = "assert\\s+True\\s*$|expect\\s*\\(\\s*true\\s*\\)\\.toBe\\s*\\(\\s*true\\s*\\)"
+detail = "Tautological always-true assertion detected"
+
+[[rules]]
+id = "broad-mock-everything"
+severity = "MEDIUM"
+category = "TEST_TAMPERING"
+regex = "@patch\\([^)]*\\)\\s*\\n?.*MagicMock\\(|jest\\.fn\\(\\)\\.mockReturnValue\\(\\s*true\\s*\\)"
+detail = "Broad blanket mock detected — ensure core business logic is actually exercised"
+
+[[rules]]
+id = "ruff-or-flake8-blanket-ignore"
+severity = "MEDIUM"
+category = "LINT_SUPPRESSION"
+regex = "#\\s*ruff:\\s*noqa\\s*$|#\\s*flake8:\\s*noqa\\s*$"
+detail = "File-wide Python linter suppression introduced"

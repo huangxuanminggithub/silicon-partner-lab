@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "veripr"
+version = "0.2.0"
+description = "Deterministic proof-of-verification receipts & AI coding anti-cheat auditor for Git PRs (0 LLM calls, 0 dependencies)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "Silicon Partner Lab (EXP-001)" }
+]
+keywords = ["git", "ci", "pull-request", "audit", "ai-coding", "testing", "verification"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Software Development :: Testing",
+]
+
+[project.scripts]
+veripr = "veripr.cli:main"
+veripr-rollup = "veripr.rollup:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["veripr*"]

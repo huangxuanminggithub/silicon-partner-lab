@@ -1,0 +1,81 @@
+# Drop-in GitHub Actions PR Verification Gate & Automatic Commenter
+# Copy to `.github/workflows/veripr-gate.yml` in your repository.
+
+name: VeriPR Proof-of-Verification Gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  veripr-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run VeriPR Deterministic Audit
+        id: veripr
+        continue-on-error: true
+        run: |
+          python3 -m veripr \
+            --base "${{ github.event.pull_request.base.sha }}" \
+            --cmd "python3 -m unittest discover -s tests -v" \
+            --md veripr-receipt.md \
+            --html veripr-receipt.html \
+            --json veripr-receipt.json \
+            --fail-on-cheat
+
+      - name: Post or Update PR Verification Receipt Comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('veripr-receipt.md', 'utf8');
+            const marker = '## VeriPR Proof-of-Verification Receipt';
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find(c => c.body && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+      - name: Upload HTML Verification Certificate Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: veripr-certificate-pr-${{ github.event.pull_request.number }}
+          path: |
+            veripr-receipt.html
+            veripr-receipt.json
+
+      - name: Enforce Gate Verdict
+        if: steps.veripr.outcome == 'failure'
+        run: |
+          echo "VeriPR detected HIGH-severity cheat signals or failed verification commands."
+          exit 1
