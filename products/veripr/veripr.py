@@ -44,6 +44,7 @@ class CommandRun:
     duration_sec: float
     stdout_sha256: str
     stderr_sha256: str
+    output_sha256: str
     output_tail: str
 
 
@@ -334,6 +335,7 @@ def execute_verification_commands(repo: Path, commands: list[str]) -> list[Comma
         stdout_hash = hashlib.sha256(proc.stdout.encode("utf-8", errors="replace")).hexdigest()
         stderr_hash = hashlib.sha256(proc.stderr.encode("utf-8", errors="replace")).hexdigest()
         combined = (proc.stdout + ("\n" + proc.stderr if proc.stderr else "")).strip()
+        output_hash = hashlib.sha256(combined.encode("utf-8", errors="replace")).hexdigest()
         tail_lines = combined.splitlines()[-12:] if combined else ["(no output)"]
         results.append(
             CommandRun(
@@ -342,6 +344,7 @@ def execute_verification_commands(repo: Path, commands: list[str]) -> list[Comma
                 duration_sec=duration,
                 stdout_sha256=stdout_hash,
                 stderr_sha256=stderr_hash,
+                output_sha256=output_hash,
                 output_tail="\n".join(tail_lines),
             )
         )
@@ -436,7 +439,7 @@ def render_markdown(r: Receipt) -> str:
         lines.append("| --- | --- | --- | --- |")
         for c in r.commands:
             st = "✅ PASS (0)" if c.exit_code == 0 else f"❌ FAIL ({c.exit_code})"
-            lines.append(f"| `{c.command}` | {st} | {c.duration_sec}s | `{c.stdout_sha256[:16]}` |")
+            lines.append(f"| `{c.command}` | {st} | {c.duration_sec}s | `{c.output_sha256[:16]}` |")
         for idx, c in enumerate(r.commands, 1):
             lines.extend(
                 [
@@ -493,7 +496,7 @@ def render_html(r: Receipt) -> str:
                 f"<td><code>{html.escape(c.command)}</code></td>"
                 f"<td><span class='pill {pill_cls}'>{pill_txt}</span></td>"
                 f"<td>{c.duration_sec}s</td>"
-                f"<td><code>{c.stdout_sha256[:16]}</code></td>"
+                f"<td><code>{c.output_sha256[:16]}</code></td>"
                 f"</tr>"
             )
 
@@ -580,7 +583,7 @@ def render_html(r: Receipt) -> str:
     <section>
       <h2>1. Commit-Bound Verification Runs</h2>
       <table>
-        <thead><tr><th>Command</th><th>Status</th><th>Duration</th><th>Stdout SHA-256</th></tr></thead>
+        <thead><tr><th>Command</th><th>Status</th><th>Duration</th><th>Output SHA-256</th></tr></thead>
         <tbody>{cmd_rows}</tbody>
       </table>
     </section>
