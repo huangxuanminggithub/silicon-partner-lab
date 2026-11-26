@@ -9,9 +9,10 @@
     "01_Governance_and_Ledger": "1vwm4CnqVuK8-TW7GiamqxFyTTNHqbxQ7",
     "02_Research_and_Strategy": "1sX3gf8_q8fc5ztyb7w_pBH3yJ7dFZ_pj",
     "03_Launch_and_Distribution": "1kzsF95euKxd5qTsjyBJnS7XOAkerH1MD",
-    "04_Product_Releases": "1bz-Fl9Y8xJijd-cldbi2ARDAkQy31CZa"
+    "04_Product_Releases": "1bz-Fl9Y8xJijd-cldbi2ARDAkQy31CZa",
+    "05_Local_Session_Handover": "1LxtobVdXomr4tLmvHf4fd3VjiM72cQvA"
   },
-  "last_synced_utc": "2026-11-26T08:11:43Z",
+  "last_synced_utc": "2026-11-26T10:18:12Z",
   "uploaded_files": [
     {
       "local_path": "diary/00_HANDOVER_AND_CONTINUITY.md",
@@ -53,14 +54,14 @@
       "folder": "01_Governance_and_Ledger",
       "parent_id": "1vwm4CnqVuK8-TW7GiamqxFyTTNHqbxQ7",
       "drive_file_id": "1tbQhlG3-L8BqXfpvA2CSSCvy0IZpZD3p",
-      "size_bytes": 8690
+      "size_bytes": 8938
     },
     {
       "local_path": "ops/HUMAN_ACTION_ITEMS.json",
       "folder": "01_Governance_and_Ledger",
       "parent_id": "1vwm4CnqVuK8-TW7GiamqxFyTTNHqbxQ7",
       "drive_file_id": "1p8aiJcurHGwnS2AavcWNHnmixG8EvCRS",
-      "size_bytes": 7694
+      "size_bytes": 7889
     },
     {
       "local_path": "ops/CLOUD_DRIVE_SYNC_PLAN.md",
@@ -88,7 +89,7 @@
       "folder": "03_Launch_and_Distribution",
       "parent_id": "1kzsF95euKxd5qTsjyBJnS7XOAkerH1MD",
       "drive_file_id": "1mJAcNdGaj4ECWRcgrKIBgvGOfuGyuxAe",
-      "size_bytes": 8026
+      "size_bytes": 8139
     },
     {
       "local_path": "launch/LAUNCH_KIT_EN.md",
@@ -102,7 +103,7 @@
       "folder": "03_Launch_and_Distribution",
       "parent_id": "1kzsF95euKxd5qTsjyBJnS7XOAkerH1MD",
       "drive_file_id": "1JgbcL7jLMd-TgANgoGQAM1VooyAuI9_K",
-      "size_bytes": 3287
+      "size_bytes": 4168
     },
     {
       "local_path": "dist/veripr-pro-kit-v0.2.0.zip",
@@ -137,7 +138,14 @@
       "folder": "04_Product_Releases",
       "parent_id": "1bz-Fl9Y8xJijd-cldbi2ARDAkQy31CZa",
       "drive_file_id": "1sqaFAT7aJnmQNZ2DV4uFFQgGDoqOSnNn",
-      "size_bytes": 321793
+      "size_bytes": 329015
+    },
+    {
+      "local_path": "ops/LOCAL_SESSION_PLAYBOOK.md",
+      "folder": "05_Local_Session_Handover",
+      "parent_id": "1LxtobVdXomr4tLmvHf4fd3VjiM72cQvA",
+      "drive_file_id": "1fxqcBW8H8u07FqH5xJj0LVn8ZIlvUF-Y",
+      "size_bytes": 9475
     }
   ]
 }
