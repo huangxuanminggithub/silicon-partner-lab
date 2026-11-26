@@ -144,12 +144,21 @@ SENSITIVE_PATH_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
     ("Dependency Lockfile", re.compile(r"(package-lock\.json|pnpm-lock\.yaml|yarn\.lock|Cargo\.lock|poetry\.lock|uv\.lock)$")),
 ]
 
+NON_SOURCE_ARTIFACT_PATTERN = re.compile(
+    r"(^|/)__pycache__/|\.(pyc|pyo|pyd|class|o|so|dylib|dll)$", re.I
+)
 TEST_FILE_PATTERN = re.compile(
     r"(^|/)(tests?|__tests__|spec)/|(\.|_)(test|spec)\.[A-Za-z0-9]+$|^test_.*\.py$", re.I
 )
 ASSERTION_PATTERN = re.compile(
     r"\b(assert\w*|expect|should|assertEqual|assertTrue|assertFalse|assertRaises|require\.\w+)\b"
 )
+
+
+def is_test_source_file(path: str) -> bool:
+    if not path or NON_SOURCE_ARTIFACT_PATTERN.search(path):
+        return False
+    return bool(TEST_FILE_PATTERN.search(path))
 
 
 def run_git(repo: Path, args: list[str], check: bool = True) -> str:
@@ -212,7 +221,7 @@ def analyze_diff(diff_text: str, ignore_patterns: list[str] | None = None) -> di
             continue
 
         if raw_line.startswith("deleted file mode "):
-            if current_file and not is_ignored(current_file) and TEST_FILE_PATTERN.search(current_file):
+            if current_file and not is_ignored(current_file) and is_test_source_file(current_file):
                 test_files_deleted.append(current_file)
                 findings.append(
                     Finding(
@@ -233,7 +242,7 @@ def analyze_diff(diff_text: str, ignore_patterns: list[str] | None = None) -> di
         if raw_line.startswith("+"):
             insertions += 1
             content = raw_line[1:]
-            is_test = bool(TEST_FILE_PATTERN.search(current_file))
+            is_test = is_test_source_file(current_file)
             if is_test and ASSERTION_PATTERN.search(content):
                 assertions_added += 1
 
@@ -273,7 +282,7 @@ def analyze_diff(diff_text: str, ignore_patterns: list[str] | None = None) -> di
         elif raw_line.startswith("-"):
             deletions += 1
             content = raw_line[1:]
-            if TEST_FILE_PATTERN.search(current_file) and ASSERTION_PATTERN.search(content):
+            if is_test_source_file(current_file) and ASSERTION_PATTERN.search(content):
                 assertions_removed += 1
             prev_added_line = ""
 
@@ -295,6 +304,8 @@ def analyze_diff(diff_text: str, ignore_patterns: list[str] | None = None) -> di
 
     # Sensitive path radar
     for fpath in sorted(touched_files):
+        if NON_SOURCE_ARTIFACT_PATTERN.search(fpath):
+            continue
         for label, pat in SENSITIVE_PATH_PATTERNS:
             if pat.search(fpath) and (fpath, label) not in flagged_sensitive:
                 flagged_sensitive.add((fpath, label))

@@ -97,6 +97,18 @@ class TestVeriPR(unittest.TestCase):
         self.assertEqual(r.verdict, "VERIFICATION_FAILED")
         self.assertNotEqual(r.commands[0].exit_code, 0)
 
+    def test_pyc_deletion_ignored_but_real_test_deletion_caught(self) -> None:
+        self.assertFalse(veripr.is_test_source_file("tests/__pycache__/test_app.cpython-312.pyc"))
+        self.assertTrue(veripr.is_test_source_file("tests/test_app.py"))
+
+        (self.repo / "test_app.py").unlink()
+        git(self.repo, "add", "-A")
+        git(self.repo, "commit", "-m", "delete test file")
+
+        r = veripr.generate_receipt(self.repo)
+        self.assertEqual(r.verdict, "CHEAT_SIGNALS_DETECTED")
+        self.assertIn("test_app.py", r.test_files_deleted)
+
 
 if __name__ == "__main__":
     unittest.main()
