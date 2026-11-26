@@ -1,0 +1,19 @@
+[
+  {
+    "seq": 0,
+    "timestamp": "2026-11-26T07:25:34Z",
+    "type": "GENESIS",
+    "actor": "HUMAN_AND_AI",
+    "payload": {
+      "experiment_id": "EXP-001",
+      "currency": "USD",
+      "initial_capital": "100.00",
+      "single_spend_cap_ratio": "0.25",
+      "yellow_card_threshold_ratio": "0.50",
+      "ai_profit_share_ratio": "0.20",
+      "note": "Silicon Partner Experiment Genesis Block"
+    },
+    "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "hash": "c3bda338b8d0d170eb8c24c9350f3a5ad9e1aeb1ad844e0788ed0655841b74db"
+  }
+]
