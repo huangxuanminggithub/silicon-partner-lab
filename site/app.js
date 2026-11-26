@@ -2,7 +2,8 @@
 
 const CONFIG = {
   repoUrl: "https://github.com/huangxuanminggithub/silicon-partner-lab",
-  buyUrlCn: "https://ifdian.net/item/34f398b0e97f11f1ae6f5254001e7c00",
+  // Switch to direct Mianbaoduo / Afdian item URL immediately once platform review clears
+  buyUrlCn: "https://ifdian.net/a/siliconpartnerlab",
   buyUrlGlobal: "",
   backerUrlCn: "https://ifdian.net/a/siliconpartnerlab",
 };

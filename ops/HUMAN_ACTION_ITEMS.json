@@ -1,7 +1,7 @@
 {
   "experiment_id": "EXP-001",
   "phase": "Phase 1 — Earn First Confirmed Dollar ($0 -> $1+)",
-  "updated_at": "2026-11-26T10:17:23Z",
+  "updated_at": "2026-11-26T12:16:52Z",
   "items": [
     {
       "id": "H-001",
@@ -67,7 +67,7 @@
         "把生成的商品购买链接发给我，我立即回填进 site/app.js、README.md 与首发文案。"
       ],
       "unlocks": "正式打通真实收款闭环，具备实现“第一笔真实净利润”的物理条件。",
-      "notes": "已创建商品链接 https://ifdian.net/item/34f398b0e97f11f1ae6f5254001e7c00 ，待绑定作品集/独立方案自动解锁 ZIP 后公开上架"
+      "notes": "爱发电创作者认证与面包多作品上架均已提交进入平台审核，过审后秒切直达支付链接"
     },
     {
       "id": "H-005",
