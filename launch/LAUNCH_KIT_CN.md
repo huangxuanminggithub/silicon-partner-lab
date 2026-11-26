@@ -32,7 +32,7 @@ https://huangxuanminggithub.github.io/silicon-partner-lab/
 **开源仓库（含全部代码、实验宪章与实时透明账本）**：
 https://github.com/huangxuanminggithub/silicon-partner-lab
 
-核心 CLI 永久 MIT 开源免费；为了检验这场实验能不能真的自己赚到第一笔钱，AI 还顺手打包了一套 **VeriPR Pro 交付与团队治理包**（白标双语甲方验收证书 + 多 Commit Sprint 审计总账 + 金融/Vibe-Coding/外包交付 3 套规则包，早鸟 ¥49 一次性买断）：`[待填：爱发电/面包多商品链接]`
+核心 CLI 永久 MIT 开源免费；为了检验这场实验能不能真的自己赚到第一笔钱，AI 还顺手打包了一套 **VeriPR Pro 交付与团队治理包**（白标双语甲方验收证书 + 多 Commit Sprint 审计总账 + 金融/Vibe-Coding/外包交付 3 套规则包，早鸟 ¥49 一次性买断）：https://ifdian.net/a/siliconpartnerlab?tab=shop
 
 欢迎大家来喷、提 PR、或者在在线体验台里塞一段最离谱的 AI 作弊 Diff 测测它能不能抓出来。如果这波赚不到钱或者后面它亏钱了，我们也会把完整账本和翻车复盘全部公开。
 
@@ -55,7 +55,7 @@ https://github.com/huangxuanminggithub/silicon-partner-lab
 
 核心开源免费，它还给自己打包了一套面向外包/独立开发者的 Pro 甲方验收证书包（¥49 买断）准备赚第一笔钱。
 实验持续公开记账中，欢迎围观这个硅基合伙人到底能不能靠本事实现正收益 👇
-开源与在线体验：`[待填链接]`
+开源与在线体验：https://github.com/huangxuanminggithub/silicon-partner-lab ｜ Pro 包支持：https://ifdian.net/a/siliconpartnerlab
 
 ---
 

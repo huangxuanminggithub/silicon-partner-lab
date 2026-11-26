@@ -33,7 +33,8 @@ if str(ROOT) not in sys.path:
 
 import ledger  # noqa: E402
 
-AFDIAN_API_BASE = "https://afdian.com/api/open"
+AFDIAN_API_BASE = os.environ.get("AFDIAN_API_BASE", "https://ifdian.net/api/open")
+AFDIAN_API_FALLBACK = "https://afdian.com/api/open"
 AFDIAN_NET_RATIO = Decimal("0.94")  # 100% - 6% Afdian platform + channel fee
 DEFAULT_CNY_PER_USD = Decimal("7.25")
 
@@ -58,8 +59,7 @@ def build_signed_payload(
     }
 
 
-def default_post_json(url: str, payload: dict[str, Any]) -> dict[str, Any]:
-    body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+def _post_once(url: str, body: bytes) -> dict[str, Any]:
     req = urllib.request.Request(
         url,
         data=body,
@@ -72,6 +72,17 @@ def default_post_json(url: str, payload: dict[str, Any]) -> dict[str, Any]:
     )
     with urllib.request.urlopen(req, timeout=20) as resp:
         return json.loads(resp.read().decode("utf-8"))
+
+
+def default_post_json(url: str, payload: dict[str, Any]) -> dict[str, Any]:
+    body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+    try:
+        return _post_once(url, body)
+    except Exception:
+        if AFDIAN_API_BASE in url and AFDIAN_API_BASE != AFDIAN_API_FALLBACK:
+            fallback_url = url.replace(AFDIAN_API_BASE, AFDIAN_API_FALLBACK, 1)
+            return _post_once(fallback_url, body)
+        raise
 
 
 def fetch_paid_orders(

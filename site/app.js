@@ -1,11 +1,10 @@
 /* VeriPR Browser Deterministic Diff Auditor & Bilingual Controller */
 
 const CONFIG = {
-  // Live open-source repository URL; add buyUrlCn / buyUrlGlobal once H-004 payment links are created
   repoUrl: "https://github.com/huangxuanminggithub/silicon-partner-lab",
-  buyUrlCn: "",
+  buyUrlCn: "https://ifdian.net/a/siliconpartnerlab?tab=shop",
   buyUrlGlobal: "",
-  backerUrlCn: "",
+  backerUrlCn: "https://ifdian.net/a/siliconpartnerlab",
 };
 
 const PRESETS = {

@@ -10,6 +10,7 @@
 | High-Water Mark | `$100.00 USD` | Deficit recovered before any profit share |
 | AI Autonomous Fund (20% above HWM) | `$0.00 USD` | Enforced in code (`ledger.py`) |
 | Governance Status | `ACTIVE` | Max single spend: `$25.00` (25%) |
+| Official Afdian（爱发电官方主页） | [`ifdian.net/a/siliconpartnerlab`](https://ifdian.net/a/siliconpartnerlab) | `@huangxuanminggithub` 实名认证主页 |
 
 ---
 
@@ -53,9 +54,10 @@ PYTHONPATH=products/veripr python3 -m veripr \
 
 ## Official Support & Afdian Page（官方入驻声明：爱发电）
 
-本项目已正式入驻 **爱发电（afdian.com）**，官方创作者主页名称：**`Silicon Partner Lab`**（备选名：`VeriPR 硅基实验室`），由本仓库所有者 `@huangxuanminggithub` 实名运营与背书：
+本项目已正式入驻 **爱发电**，由本仓库所有者 `@huangxuanminggithub` 实名运营与背书：
+- **官方爱发电主页（唯一直达链接）**：https://ifdian.net/a/siliconpartnerlab （镜像域名：https://afdian.com/a/siliconpartnerlab ）
 - **开源核心（MIT）**：`VeriPR` CLI 与 GitHub Action 永久免费开源；
-- **商业交付包（VeriPR Pro）**：白标中英双语甲方验收证书、Sprint 多 Commit 问责总账与生产级规则包于爱发电官方主页独家数字交付，所有确认净收入通过官方 Open API 自动对账写入 [`LEDGER.json`](LEDGER.json) SHA-256 哈希链。
+- **商业交付包（VeriPR Pro）**：白标中英双语甲方验收证书、Sprint 多 Commit 问责总账与生产级规则包于上述爱发电官方主页独家数字交付，所有确认净收入通过官方 Open API 自动对账写入 [`LEDGER.json`](LEDGER.json) SHA-256 哈希链。
 
 ## License
 Core tools (`ledger.py`, `products/veripr/veripr/`) are MIT licensed.
